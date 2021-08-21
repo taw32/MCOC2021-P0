@@ -45,7 +45,7 @@
 * Los casos de este trabajo están en el mismo orden de el enunciado.
 * ¿Como es la variabilidad del tiempo de ejecucion para cada algoritmo?
 + En el caso 1 para la 2da parte (eigh), los datos del tipo double se demoran mas que los float (yo usé float 32 para todos). Lo mismo para el operador solve, sin embargo en este caso para la primera matriz el caso solve double le costó considerablemente más partir.
-+ La dispersión en todos los casos es bastante viendo las diferentes corridas. 
++ La dispersión en todos los casos es bastante chica viendo las diferentes corridas varian desde el 1 ms a 0,1 s max 1,2 s en los casos mas extremos. 
 + En los casos 2 y 3 el tiempo varia muhco mas con el operador eigh, y con respecto al tipo de datos, muy similar float y double.
 + Para el caso 4 las disperciones son menores con un pico en la dimencion 40 para el operador eigh, el operador solve varia de 1ms a 0,1 seg aprox.
 + En este caso las diperciones se comportan muy parecidos al 4 siendo ligeramente mayores para los 2 operadores.
@@ -68,7 +68,7 @@
 + Para matrices chicas, sacar el inverso de la matriz A no toma tanto tiempo, sin embargo para matrices mas grandes ya empieza a ser una operación que ocupa mas tiempo, por eso, el operador eigh a partir de la dimención 200 ya empieza a pillarlo en tiempo.
 
 * ¿Su computador usa más de un proceso por cada corrida?
-+ 
++ Si, cambia con las matrices mayores a 200.
 
 * ¿Que hay del uso de memoria (como crece)? 
-+ La memoria no la medí a nivel 
++ La memoria va creciendo hasat la matriz dimención 200, luego baja. 
