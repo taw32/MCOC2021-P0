@@ -41,20 +41,34 @@
 
 
 # Desempeño de solve y eigh
+
+* Los casos de este trabajo están en el mismo orden de el enunciado.
 * ¿Como es la variabilidad del tiempo de ejecucion para cada algoritmo?
-+ 
++ En el caso 1 para la 2da parte (eigh), los datos del tipo double se demoran mas que los float (yo usé float 32 para todos). Lo mismo para el operador solve, sin embargo en este caso para la primera matriz el caso solve double le costó considerablemente más partir.
++ La dispersión en todos los casos es bastante viendo las diferentes corridas. 
++ En los casos 2 y 3 el tiempo varia muhco mas con el operador eigh, y con respecto al tipo de datos, muy similar float y double.
++ Para el caso 4 las disperciones son menores con un pico en la dimencion 40 para el operador eigh, el operador solve varia de 1ms a 0,1 seg aprox.
++ En este caso las diperciones se comportan muy parecidos al 4 siendo ligeramente mayores para los 2 operadores.
++ Para el caso 6 volvio una disperción mayor, en el operaador eigh principalmente.
++ Los 3 casos restantes 7 8 y 9 solo tiene operador eigh.
 
 * ¿Qué algoritmo gana (en promedio) en cada caso?
-+
++ Caso 1 gana solve considerablemente en los datos double y float.
++ Caso 2 gana solve considerablemente en los datos double y float.
++ Caso 3 gana solve considerablemente en los datos double y float.
++ Caso 4 gana solve pero muy equiparado, el max de eigh float es 0,11 s y el de solve es 0,93 s. en los datos tipo double, hay mas separacion ganando solve.
++ caso 5 gana solve considerablemente en los datos double y float.
++ Caso 6 están muy juntos en el caso de los datos double, y gana solve para los datos float. Float y double muy parecidos.
++ Caso 7 Caso 8 Caso 9 solo hay para casos eigh, muy parecidos los datos float y solve.
 
 * ¿Depende del tamaño de la matriz?
-+
++ Claramente depende de el tamaño, generalemente, el operador solve parte mas rápido resolviendo las matrices pequeñas, sin embargo cuando las matrices pasan la dimension 200, estas empiezan a igualarse hasta llegar a la 1000, ahí generalemente son iguales. Siendo el float 32 bastante mas rápido que el double.
 
 * ¿A que se puede deber la superioridad de cada opción?
-+
++ Para matrices chicas, sacar el inverso de la matriz A no toma tanto tiempo, sin embargo para matrices mas grandes ya empieza a ser una operación que ocupa mas tiempo, por eso, el operador eigh a partir de la dimención 200 ya empieza a pillarlo en tiempo.
 
 * ¿Su computador usa más de un proceso por cada corrida?
-+
++ 
 
 * ¿Que hay del uso de memoria (como crece)? 
-+
++ La memoria no la medí a nivel 
