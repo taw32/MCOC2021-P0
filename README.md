@@ -37,4 +37,24 @@
 # Desempeño INV
 * ¿Qué algoritmo de inversión cree que utiliza cada método (ver wiki)? Justifique claramente su respuesta.
 
-* ¿Como incide el paralelismo y la estructura de caché de su procesador en el desempeño en cada caso? Justifique su comentario en base al uso de procesadores y memoria observado durante las corridas.  ¡
+* ¿Como incide el paralelismo y la estructura de caché de su procesador en el desempeño en cada caso? Justifique su comentario en base al uso de procesadores y memoria observado durante las corridas.  
+
+
+# Desempeño de solve y eigh
+* ¿Como es la variabilidad del tiempo de ejecucion para cada algoritmo?
++ 
+
+* ¿Qué algoritmo gana (en promedio) en cada caso?
++
+
+* ¿Depende del tamaño de la matriz?
++
+
+* ¿A que se puede deber la superioridad de cada opción?
++
+
+* ¿Su computador usa más de un proceso por cada corrida?
++
+
+* ¿Que hay del uso de memoria (como crece)? 
++
