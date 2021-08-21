@@ -1,0 +1,85 @@
+import scipy as scipy
+from sympy import *
+import numpy as np 
+from numpy import zeros,float32,half,single,double,longdouble
+from time import perf_counter
+from scipy import linalg
+import matplotlib.pyplot as plt 
+import statistics as stats
+
+plt.figure()
+Nval = [2, 5, 10, 15, 20, 30, 35, 40, 45, 50, 55, 60, 75, 100, 110, 125, 160, 200, 230, 250, 350, 500, 600, 800, 1000]#, 2000, 5000, 10000]
+Ncorridas = 10
+matriz = []
+
+x = [10,20,50,100,200,500,1000,2000,5000,10000,20000]
+y = [0.1e-3,1e-3,1e-2,0.1,1.,10.,60,60*10, 60*100]
+y2 = [10*3,104,105,106,107,108,109,10*10]
+
+xlabel = ["10","20","50","100","200","500","1000","2000","5000","10000","20000"]
+ylabel = ["0.1 ms","1 ms","10 ms","0.1 s","1 s","10 s","1 min","10 min","100min"] #esta linea define visualmente el 
+
+l1 = [0.1e-4,20000,1e-2,6000]
+l2 = [0.1e-4,20000,1e-2,10000000000]
+
+nombres_archivos = ["timing0.txt","timing1.txt","timing2.txt","timing3.txt","timing4.txt","timing5.txt","timing6.txt","timing7.txt","timing8.txt","timing9.txt"]
+
+def matriz_laplaciana(N,dtype = double):
+    A =zeros((N,N),dtype =dtype)
+    for i in range(N):
+        for j in range(N):
+            if i == j:
+                A[i,j] = 2
+            elif i+1 ==j:
+                A[i,j] = -1
+            elif i-1 == j:
+                A[i,j] = -1
+    return A
+for i in range(Ncorridas):
+    name = (nombres_archivos[i]) 
+    archivo=open(name,'w')        
+    tiempos = []
+    for N in Nval:
+        A = matriz_laplaciana(N) 
+        b = np.ones(N)
+        t1 = perf_counter()
+        B = scipy.linalg.eigh(A,b=None,driver="evr", overwrite_a = False)
+        print (B)
+        t2 = perf_counter()
+        dt = t2 - t1
+        print(f"Para N = {N}, el tiempo transcurrido scipy = {dt} s\n")
+        archivo.write(f"{N} {dt}\n")
+        tiempos.append(dt)
+    plt.loglog(Nval,tiempos,"-o")
+    matriz.append(tiempos)
+    archivo.close()  
+
+matriz = np.matrix(matriz)
+matriz = matriz.T
+matriz = matriz.tolist()
+promedio = []
+
+plt.title("Rendimiento")
+plt.xlabel("Tamaño de la matriz (N)")
+plt.ylabel("Tiempo Transcurrido (s)")
+plt.xticks(x,xlabel,rotation=45)
+plt.yticks(y,ylabel)
+plt.grid(True)
+plt.show()
+
+plt.savefig("timing_6_eigh_double.png")
+
+for i in (matriz):
+    prom = stats.mean(i)
+    promedio.append(prom)
+
+plt.loglog(Nval,promedio)
+plt.title("Rendimiento")
+plt.xlabel("Tamaño de la matriz (N)")
+plt.ylabel("Tiempo Transcurrido (s)")
+plt.xticks(x,xlabel,rotation=45)
+plt.yticks(y,ylabel)
+plt.grid(True)
+plt.show()
+
+plt.savefig("prom.timing_6_eigh_double.png")
