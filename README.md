@@ -3,14 +3,22 @@
 # Mi computador
 
 * Modelo: MacBook Air (13-inch, Mid 2013)
-* procesador 1,3 GHz Intel Core i5 de dos núcleos
++ Nombre del procesador:	Intel Core i5 de dos núcleos
 + Numero de núcleos: 2
 + Numero de hilos:
 
-* Memoria: 4 GB 1600 MHz DDR3 (frecuencia de RAM 1600 MHz)
-* Almacenamiento 251 GB Almacenamiento flach
-* Numero de nucleos
-* Grafica Intel HD Graphics 5000 1536
++ Memoria: 4 GB 1600 MHz DDR3 (frecuencia de RAM 1600 MHz)
++ Almacenamiento 251 GB Almacenamiento flach
++ Grafica Intel HD Graphics 5000 1536
++ Identificador del modelo:	MacBookAir6,2
++ Velocidad del procesador:	1,3 GHz
++ Cantidad de procesadores:	1
++ Cantidad total de núcleos:	2
++ Caché de nivel 2 (por núcleo):	256 KB
++ Caché de nivel 3:	3 MB
++ Tecnología Hyper-Threading:	Activado
++ Memoria:	4 GB
+
 
 # Desempeño Matmul
 
@@ -25,3 +33,8 @@
 + python 3.8
 * ¿Qué versión de numpy está usando?
 + La por defecto de anaconda
+
+# Desempeño INV
+* ¿Qué algoritmo de inversión cree que utiliza cada método (ver wiki)? Justifique claramente su respuesta.
+
+* ¿Como incide el paralelismo y la estructura de caché de su procesador en el desempeño en cada caso? Justifique su comentario en base al uso de procesadores y memoria observado durante las corridas.  ¡
