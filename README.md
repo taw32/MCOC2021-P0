@@ -52,7 +52,12 @@
 + Para el caso 6 volvio una disperción mayor, en el operaador eigh principalmente.
 + Los 3 casos restantes 7 8 y 9 solo tiene operador eigh.
 
-! [Gráficos](![1 eigh double](https://user-images.githubusercontent.com/69284354/131425582-d1ca9df9-2d88-4058-afc9-19a5e7e96b10.png))
+# Gráficos
+
+![1 eigh double](https://user-images.githubusercontent.com/69284354/131425582-d1ca9df9-2d88-4058-afc9-19a5e7e96b10.png)
+![1 eigh float](https://user-images.githubusercontent.com/69284354/131425682-8d201d20-3413-4a77-9e73-32941bf208ee.png)
+![1 solve double](https://user-images.githubusercontent.com/69284354/131425730-318e49f8-e30b-4a35-809d-5e07064c362a.png)
+![1 solve float](https://user-images.githubusercontent.com/69284354/131425746-5635d85e-4459-40dc-9a4c-6bbf57e8763c.png)
 
 
 * ¿Qué algoritmo gana (en promedio) en cada caso?
