@@ -52,7 +52,8 @@
 + Para el caso 6 volvio una disperción mayor, en el operaador eigh principalmente.
 + Los 3 casos restantes 7 8 y 9 solo tiene operador eigh.
 
-! [Gráficos](file:///Users/macbookair2013/Dropbox/Mi%20Mac%20(Tomas-Vergara.local)/Desktop/P0-MCOC/Graficos/1%20eigh%20double.png)
+! [Gráficos](![1 eigh double](https://user-images.githubusercontent.com/69284354/131425582-d1ca9df9-2d88-4058-afc9-19a5e7e96b10.png))
+
 
 * ¿Qué algoritmo gana (en promedio) en cada caso?
 + Caso 1 gana solve considerablemente en los datos double y float.
