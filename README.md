@@ -33,6 +33,7 @@
 + python 3.8
 * ¿Qué versión de numpy está usando?
 + La por defecto de anaconda
+![image](https://user-images.githubusercontent.com/69284354/131904732-4151314d-b47d-46db-afbe-4689d79a1b97.png)
 
 # Desempeño INV
 * ¿Qué algoritmo de inversión cree que utiliza cada método (ver wiki)? Justifique claramente su respuesta.
