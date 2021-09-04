@@ -85,7 +85,7 @@
 
 # (Entrega 5) El Código de ensamblaje es:
 
-```(def matriz_laplaciana_dispersa(N, dtype=np.double):
+`def matriz_laplaciana_dispersa(N, dtype=np.double):
     A= lil_matrix((N,N))
     for i in range(N):
         for j in range(N):
@@ -95,9 +95,28 @@
                 A[i,j] = -1
             if i - 1 == j:   
                 A[i,j] = -1
-    return csc_matrix(A))```
+    return csc_matrix(A))`
     
 
-* Aquí se ve claramente que la matriz laplaciana es bastante mas rapida que la matriz normal, esto se ve reflejado en los gráficos.
-+ ![image](https://user-images.githubusercontent.com/69284354/132101672-8d21d973-c994-452c-a37e-5c70e6f20669.png)
-+ ![image](https://user-images.githubusercontent.com/69284354/132101678-d84ee4b9-3b1a-46bd-ba3a-d24ddd49fbfc.png)
+* Aquí se ve claramente que la matriz laplaciana es bastante mas rapida que la matriz normal, esto se ve reflejado en los gráficos. Esto se debe, a lo visto en clases, donde la info guardada por las matrices llenas es 6 veces mayor que las matrices discretas, entonces a la hora de operar, el computador lo puede hacer de manera mas rápida
+ ![image](https://user-images.githubusercontent.com/69284354/132101672-8d21d973-c994-452c-a37e-5c70e6f20669.png)
+ ![image](https://user-images.githubusercontent.com/69284354/132101678-d84ee4b9-3b1a-46bd-ba3a-d24ddd49fbfc.png)
+
+
+# Entrega 6
+* Comente las diferencias que ve en el comportamiento de los algoritmos en el caso de matrices llenas y dispersas.
++ La diferencia era como indicabamos en la entrega pasada, para las matrices llenas se almacena mucha mas información que para matrices discretas, por eso las operatorias funcionan mas rapido, sin embargo, para esta entrega, el solve de numpy y de scipy no me funcionó para matrices discretas por un problema de "module 'scipy.sparse' has no attribute 'solve'" y "module 'scipy.sparse' has no attribute 'inv'" respectivamente.
+
+* ¿Cual parece la complejidad asintótica (para 𝑁→∞)  para el ensamblado y solución en ambos casos y porqué?
++ Aparentemente, y a juzgar por la multiplicación de la entrega anterior, con N -> ∞, la matriz discreta debiera mostrar su mejora cada vez con mayor propiedad. De esta forma, debiera llegar a ser ∞ también la diferencia de tiempo entre una y otra.
+
+* ¿Como afecta el tamaño de las matrices al comportamiento aparente?
++ Cada vez mas grande las matrices, mas es la diferencia entre las discretas y las llenas, siendo las primeras las que claramente son mas optimas para trabajar en matrices de gran dimención.
+
+* ¿Qué tan estables son las corridas (se parecen todas entre si siempre, nunca, en un rango)?
++ Las corridas son poco estables para la operación pero muy estables para el ensamblado, es mas, es casi lineal su comportamiento a medida que sube la dimención.
++ Aquí se puede ver como cuando las matrices están en 5000 los gráficos se comportan tal cual lo esperado.
+
+![image](https://user-images.githubusercontent.com/69284354/132102116-19b7996b-5ae5-48c4-97e5-b651567c2753.png)
+![image](https://user-images.githubusercontent.com/69284354/132102264-a89df1b3-2aa0-42f7-9e90-6616c7f68ea6.png)
+
