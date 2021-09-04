@@ -1,0 +1,137 @@
+"""
+Created on Fri Sep  3 23:31:15 2021
+
+@author: macbookair2013
+"""
+
+import numpy as np 
+from numpy import double,array,linspace
+from time import perf_counter
+import matplotlib.pyplot as plt
+from scipy.sparse import lil_matrix, csc_matrix
+
+
+def matriz_laplaciana_llena(N, dtype=np.double):
+    A= np.identity(N,dtype)*2
+    for i in range(N):
+        for j in range(N):
+            if i +1== j:
+                A[i,j] = -1
+            if i - 1 == j:   
+                A[i,j] = -1
+    return A
+
+def matriz_laplaciana_dispersa(N, dtype=np.double):
+    A= lil_matrix((N,N))
+    for i in range(N):
+        for j in range(N):
+            if i == j:
+                A[i,j]=2
+            if i +1== j:
+                A[i,j] = -1
+            if i - 1 == j:   
+                A[i,j] = -1
+    return csc_matrix(A)
+
+Ncorridas = 10
+Ns = [1, 2, 5, 11 ,12, 17, 22, 33, 40, 48, 50, 55,60, 75, 100,125, 160, 200,250, 350, 500,600, 800]#,1000,2000,5000,10000]
+names = ["A_multB_matmul_dispersa0.txt","A_multB_matmul_dispersa1.txt","A_multB_matmul_dispersa2.txt","A_multB_matmul_dispersa3.txt","A_multB_matmul_dispersa4.txt",
+         "A_multB_matmul_dispersa5.txt","A_multB_matmul_dispersa6.txt","A_multB_matmul_dispersa7.txt","A_multB_matmul_dispersa8.txt","A_multB_matmul_dispersa9.txt"]
+files = [open(name,"w") for name in names]
+dts2 = []
+CN = []
+CN2 = []
+CN3 = []
+CN4 = []
+#labels y escalados para los grafico
+x = [10,20,50,100,200,500,1000,2000,5000,10000,20000]
+xlab = ["10","20","50","100","200","500","1000","2000","5000","10000","20000"]
+y = [0.1e-3,1e-3,1e-2,0.1,1.,10.,60,60*10]
+ylab = ["0.1 ms","1 ms","10 ms","0.1 s","1 s","10 s","1 min","10 min"] 
+y2 = [10**3,10**4,10**5,10**6,10**7,10**8,10**9,10**10]
+ylab2 = ["1 KB","10 KB","100 KB","1 MB","10 MB","100 MB","1 GB","10 GB","100 GB"]
+
+
+for N in Ns:
+    dts = np.zeros((Ncorridas,2))    
+    for i in range(Ncorridas):   
+        t1 = perf_counter()
+        A = matriz_laplaciana_dispersa(N,double) 
+        B = matriz_laplaciana_dispersa(N,double)
+        t2 = perf_counter()
+        t3 = perf_counter()
+        C = A@B
+        t4 = perf_counter()
+        dt = t2-t1
+        dt2 = t4-t3 
+        dts[i][0] = dt
+        dts[i][1] = dt2    
+    dts2.append(dts)
+    
+for i in range(len(dts2)): 
+        counter = 0
+        for j in range(5):
+            for k in range(5):
+                if counter == 5:
+                    break
+                files[counter].write(f"{Ns[i]} {dts2[i][k][0]} {dts2[i][k][1]}\n") 
+                print (files)
+                files[counter].flush() 
+                counter +=1
+                
+[file.close() for file in files] 
+       
+
+archivos = [names[0],names[1],names[2],names[3],names[4]]
+tiempo_ensamblado = [[],[],[],[],[]]
+tiempo_solucion = [[],[],[],[],[]]
+for j in range(len(archivos)):
+    file = open(archivos[j],"r")
+    matrix = [[(num) for num in line.split(' ')] for line in file]
+    for k in range(len(Ns)):
+        tiempo_yi = float(matrix[k][1])
+        tiempo_yii = float(matrix[k][2])
+        tiempo_ensamblado[j].append(tiempo_yi)
+        tiempo_solucion[j].append(tiempo_yii)
+    file.close()
+
+plt.figure()
+plt.subplot(2,1,1)
+xlinspace = linspace(1,Ns[-1],10000)
+maxi = (array(tiempo_ensamblado)).max()
+print(xlinspace)
+for i in range(len(tiempo_ensamblado)):
+    plt.loglog(Ns,tiempo_ensamblado[i],"-k.",color = "0.5", markersize=5 )
+    
+plt.plot([Ns[0],Ns[-1]],[maxi,maxi],"--b") 
+plt.loglog(xlinspace,xlinspace*(maxi/Ns[-1]), '--', color='orange') 
+plt.loglog(xlinspace,xlinspace**2*(maxi/Ns[-1]**2),"g--")
+plt.loglog(xlinspace,xlinspace**3*(maxi/Ns[-1]**3),"--",color = "red")
+plt.loglog(xlinspace,xlinspace**4*(maxi/Ns[-1]**4),"--",color='purple')
+plt.xticks(x,[],rotation='45')
+plt.title("Multiplicación Matriz Dispersa")
+plt.yticks(y,ylab) 
+plt.ylabel("Tiempo de ensamblado")
+plt.ylim([0.000001,300])
+plt.xlim([Ns[0],20000])
+plt.grid()
+
+plt.subplot(2,1,2)
+for i in range(len(tiempo_ensamblado)):
+    plt.loglog(Ns,tiempo_solucion[i],"-k.",color = "0.5" ,markersize=5)
+maxi = (array(tiempo_solucion)).max()
+
+plt.plot([Ns[0],Ns[-1]],[maxi,maxi],"--b",label = "constante") 
+plt.loglog(xlinspace,xlinspace*(maxi/Ns[-1]), '--', color='orange',label="O(N)") 
+plt.loglog(xlinspace,xlinspace**2*(maxi/Ns[-1]**2),"g--",label="O(N$^2$)")
+plt.loglog(xlinspace,xlinspace**3*(maxi/Ns[-1]**3),"r--",label="O(N$^3$)")
+plt.loglog(xlinspace,xlinspace**4*(maxi/Ns[-1]**4),"--",color='purple',label="O(N$^4$)")
+plt.xticks(x,xlab,rotation='45')
+plt.yticks(y,ylab)
+plt.xlabel("Tamaño de la matriz")
+plt.ylabel("Tiempo de solución")
+plt.ylim([0.000001,300])
+plt.xlim([Ns[0],20000])
+plt.legend()
+plt.grid()
+plt.tight_layout()
