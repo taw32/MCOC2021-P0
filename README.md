@@ -85,7 +85,7 @@
 
 # (Entrega 5) El Código de ensamblaje es:
 
-``def matriz_laplaciana_dispersa(N, dtype=np.double):
+```def matriz_laplaciana_dispersa(N, dtype=np.double):
     A= lil_matrix((N,N))
     for i in range(N):
         for j in range(N):
@@ -95,7 +95,7 @@
                 A[i,j] = -1
             if i - 1 == j:   
                 A[i,j] = -1
-    return csc_matrix(A)``
+    return csc_matrix(A)```
     
 
 * Aquí se ve claramente que la matriz laplaciana es bastante mas rapida que la matriz normal, esto se ve reflejado en los gráficos.
