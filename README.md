@@ -82,3 +82,21 @@
 
 * ¿Que hay del uso de memoria (como crece)? 
 + La memoria va creciendo hasat la matriz dimención 200, luego baja. 
+
+# (Entrega 5) El Código de ensamblaje es:
+
+`def matriz_laplaciana_dispersa(N, dtype=np.double):
+    A= lil_matrix((N,N))
+    for i in range(N):
+        for j in range(N):
+            if i == j:
+                A[i,j]=2
+            if i +1== j:
+                A[i,j] = -1
+            if i - 1 == j:   
+                A[i,j] = -1
+  return csc_matrix(A)`
+
+* Aquí se ve claramente que la matriz laplaciana es bastante mas rapida que la matriz normal, esto se ve reflejado en los gráficos.
++ ![image](https://user-images.githubusercontent.com/69284354/132101672-8d21d973-c994-452c-a37e-5c70e6f20669.png)
++ ![image](https://user-images.githubusercontent.com/69284354/132101678-d84ee4b9-3b1a-46bd-ba3a-d24ddd49fbfc.png)
