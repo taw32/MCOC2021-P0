@@ -84,8 +84,8 @@
 + La memoria va creciendo hasat la matriz dimención 200, luego baja. 
 
 # (Entrega 5) El Código de ensamblaje es:
-
-`def matriz_laplaciana_dispersa(N, dtype=np.double):
+``
+def matriz_laplaciana_dispersa(N, dtype=np.double):
     A= lil_matrix((N,N))
     for i in range(N):
         for j in range(N):
@@ -95,12 +95,13 @@
                 A[i,j] = -1
             if i - 1 == j:   
                 A[i,j] = -1
-    return csc_matrix(A))`
-    
+    return csc_matrix(A))
+    ``
 
 * Aquí se ve claramente que la matriz laplaciana es bastante mas rapida que la matriz normal, esto se ve reflejado en los gráficos. Esto se debe, a lo visto en clases, donde la info guardada por las matrices llenas es 6 veces mayor que las matrices discretas, entonces a la hora de operar, el computador lo puede hacer de manera mas rápida
- ![image](https://user-images.githubusercontent.com/69284354/132101672-8d21d973-c994-452c-a37e-5c70e6f20669.png)
- ![image](https://user-images.githubusercontent.com/69284354/132101678-d84ee4b9-3b1a-46bd-ba3a-d24ddd49fbfc.png)
+
+![image](https://user-images.githubusercontent.com/69284354/132101672-8d21d973-c994-452c-a37e-5c70e6f20669.png)
+![image](https://user-images.githubusercontent.com/69284354/132101678-d84ee4b9-3b1a-46bd-ba3a-d24ddd49fbfc.png)
 
 
 # Entrega 6
